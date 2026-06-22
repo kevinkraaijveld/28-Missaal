@@ -1,0 +1,343 @@
+/* ── Reset & base ────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg:           #f0eeeb;
+  --surface:      #e8e6e2;
+  --surface-open: #dddad5;
+  --border:       #ccc9c3;
+  --text:         #2c2a27;
+  --text-muted:   #7a7670;
+  --accent:       #8a7560;
+  --shadow:       rgba(0,0,0,.08);
+  --radius:       6px;
+  --font-display: 'Georgia', 'Times New Roman', serif;
+  --font-body:    'Segoe UI', system-ui, sans-serif;
+}
+
+html { font-size: 16px; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  min-height: 100vh;
+  padding: 2rem 1rem 4rem;
+}
+
+main {
+  max-width: 680px;
+  margin: 0 auto;
+  position: relative;
+}
+
+/* ── Heading ─────────────────────────────────────────────────── */
+h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 6vw, 3rem);
+  font-weight: 400;
+  letter-spacing: .03em;
+  color: var(--text);
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+/* ── Date navigator ──────────────────────────────────────────── */
+.date-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .75rem;
+  margin-bottom: 2.5rem;
+}
+
+.date-label {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  color: var(--text);
+  cursor: pointer;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 2px;
+  min-width: 220px;
+  text-align: center;
+  transition: border-color .15s, color .15s;
+  user-select: none;
+}
+
+.date-label:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.arrow {
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text-muted);
+  font-size: 1.5rem;
+  line-height: 1;
+  width: 2.2rem;
+  height: 2.2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background .15s, color .15s;
+  flex-shrink: 0;
+}
+
+.arrow:hover {
+  background: var(--surface);
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+/* ── Custom datepicker ───────────────────────────────────────── */
+.datepicker {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 5.5rem;
+  z-index: 100;
+  background: #f7f6f3;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  box-shadow: 0 8px 28px rgba(0,0,0,.14);
+  padding: 1rem;
+  width: 300px;
+}
+
+.datepicker[hidden] { display: none; }
+
+.dp-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: .75rem;
+  gap: .5rem;
+}
+
+.dp-month-year {
+  display: flex;
+  gap: .4rem;
+  flex: 1;
+  justify-content: center;
+}
+
+.dp-month-year select {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text);
+  font-family: var(--font-display);
+  font-size: .95rem;
+  padding: .25rem .4rem;
+  cursor: pointer;
+  appearance: auto;
+}
+
+.dp-month-year select:focus {
+  outline: 2px solid var(--accent);
+}
+
+.dp-nav {
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text-muted);
+  font-size: 1.3rem;
+  width: 2rem;
+  height: 2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background .15s, color .15s;
+}
+
+.dp-nav:hover {
+  background: var(--surface);
+  color: var(--accent);
+}
+
+.dp-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  margin-bottom: .3rem;
+}
+
+.dp-weekdays span {
+  text-align: center;
+  font-size: .75rem;
+  color: var(--text-muted);
+  padding: .2rem 0;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+
+.dp-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+}
+
+.dp-day {
+  text-align: center;
+  padding: .45rem .2rem;
+  border-radius: 4px;
+  font-size: .9rem;
+  cursor: pointer;
+  color: var(--text);
+  border: none;
+  background: none;
+  transition: background .1s, color .1s;
+}
+
+.dp-day:hover {
+  background: var(--surface-open);
+  color: var(--accent);
+}
+
+.dp-day.today {
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.dp-day.selected {
+  background: var(--accent);
+  color: #fff;
+}
+
+.dp-day.selected:hover {
+  background: #7a6550;
+  color: #fff;
+}
+
+.dp-day.other-month {
+  color: var(--border);
+}
+
+.dp-day.other-month:hover {
+  background: var(--surface);
+  color: var(--text-muted);
+}
+
+/* ── Prayer dropdowns ────────────────────────────────────────── */
+.prayers {
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+}
+
+.prayer-block {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: 0 1px 3px var(--shadow);
+  transition: box-shadow .15s;
+}
+
+.prayer-block[open] {
+  box-shadow: 0 2px 8px var(--shadow);
+}
+
+.prayer-block summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: .85rem 1.1rem;
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 400;
+  letter-spacing: .02em;
+  color: var(--text);
+  cursor: pointer;
+  list-style: none;
+  user-select: none;
+  background: var(--surface);
+  transition: background .15s;
+}
+
+.prayer-block summary::-webkit-details-marker { display: none; }
+
+.prayer-block summary::after {
+  content: '›';
+  font-size: 1.25rem;
+  color: var(--text-muted);
+  transform: rotate(90deg);
+  display: inline-block;
+  transition: transform .2s;
+}
+
+.prayer-block[open] summary {
+  background: var(--surface-open);
+}
+
+.prayer-block[open] summary::after {
+  transform: rotate(270deg);
+}
+
+.prayer-block summary:hover {
+  background: var(--surface-open);
+}
+
+.prayer-content {
+  padding: 1rem 1.25rem 1.25rem;
+  font-size: .95rem;
+  line-height: 1.7;
+  color: var(--text);
+  border-top: 1px solid var(--border);
+  min-height: 3rem;
+}
+
+.prayer-content p {
+  margin-bottom: .75rem;
+}
+
+.prayer-content p:last-child {
+  margin-bottom: 0;
+}
+
+.prayer-content em.empty {
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+.prayer-content.loading {
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+/* Onderdelen binnen een gebed */
+.prayer-part {
+  margin-bottom: 1.5rem;
+}
+
+.prayer-part:last-child {
+  margin-bottom: 0;
+}
+
+.prayer-part-title {
+  font-family: var(--font-display);
+  font-size: .8rem;
+  font-weight: 400;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: .5rem;
+  padding-bottom: .3rem;
+  border-bottom: 1px solid var(--border);
+}
+
+/* ── Responsive ──────────────────────────────────────────────── */
+@media (max-width: 480px) {
+  .date-label { min-width: 160px; font-size: 1rem; }
+  .datepicker { width: 280px; }
+}

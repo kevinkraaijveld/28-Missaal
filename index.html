@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kevin's Missaal</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <main>
+    <h1>Kevin's Missaal</h1>
+
+    <div class="date-nav">
+      <button class="today-btn" id="today" aria-label="Vandaag">&#x1F4C5;</button>
+
+      <button class="arrow" id="prev" aria-label="Vorige dag">&#8249;</button>
+      <span class="date-label" id="date-display"></span>
+      <button class="arrow" id="next" aria-label="Volgende dag">&#8250;</button>
+    </div>
+
+    <!-- Custom datepicker popup -->
+    <div class="datepicker" id="datepicker" role="dialog" aria-modal="true" aria-label="Datum kiezen" hidden>
+      <div class="dp-header">
+        <button class="dp-nav" id="dp-prev-month" aria-label="Vorige maand">&#8249;</button>
+        <div class="dp-month-year">
+          <select id="dp-month"></select>
+          <select id="dp-year"></select>
+        </div>
+        <button class="dp-nav" id="dp-next-month" aria-label="Volgende maand">&#8250;</button>
+      </div>
+      <div class="dp-weekdays">
+        <span>ma</span><span>di</span><span>wo</span><span>do</span>
+        <span>vr</span><span>za</span><span>zo</span>
+      </div>
+      <div class="dp-grid" id="dp-grid"></div>
+    </div>
+
+    <section class="prayers">
+
+      <details class="prayer-block" data-slug="lauden">
+        <summary>Lauden</summary>
+        <div class="prayer-content"></div>
+      </details>
+
+      <details class="prayer-block" data-slug="terts">
+        <summary>Terts</summary>
+        <div class="prayer-content"></div>
+      </details>
+
+      <details class="prayer-block" data-slug="sext">
+        <summary>Sext</summary>
+        <div class="prayer-content"></div>
+      </details>
+
+      <details class="prayer-block" data-slug="none">
+        <summary>None</summary>
+        <div class="prayer-content"></div>
+      </details>
+
+      <details class="prayer-block" data-slug="vespers">
+        <summary>Vespers</summary>
+        <div class="prayer-content"></div>
+      </details>
+
+      <details class="prayer-block" data-slug="completten">
+        <summary>Completten</summary>
+        <div class="prayer-content"></div>
+      </details>
+
+      <details class="prayer-block" data-slug="hoogfeest">
+        <summary>Hoogfeest</summary>
+        <div class="prayer-content"></div>
+      </details>
+
+      <details class="prayer-block" data-slug="noveen">
+        <summary>Noveen</summary>
+        <div class="prayer-content"></div>
+      </details>
+
+      <details class="prayer-block" data-slug="litanie">
+        <summary>Litanie</summary>
+        <div class="prayer-content"></div>
+      </details>
+
+      <details class="prayer-block" data-slug="metten">
+        <summary>Metten</summary>
+        <div class="prayer-content"></div>
+      </details>
+
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
